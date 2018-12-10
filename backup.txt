@@ -1,0 +1,108 @@
+static void Main(string[] args)
+        {
+            // ... Create 2D array of strings.
+            int[,] array = new int[,]
+            {
+            {1, 2,},
+            {3, 4,},
+            {5, 6,},
+            };
+
+
+            // Print values of array
+            Console.Write(array[0, 0]);
+            Console.WriteLine(array[0, 1]);
+            Console.Write(array[1, 0]);
+            Console.WriteLine(array[1, 1]);
+            Console.Write(array[2, 0]);
+            Console.WriteLine(array[2, 1]);
+
+            string user = "";
+            string input = "";
+            string Fobject = "1";
+            int permission = 3;
+
+            Boolean access = false;
+
+            // LOG-IN AS OWNER/GUEST
+            Console.WriteLine("Please log in");
+            user = Console.ReadLine();
+
+            switch (user)
+            {   
+                case "owner":
+                    Console.WriteLine("Logged in as " + user);
+                    access = true;
+                    break;
+                case "guest":
+                    Console.WriteLine("Logged in as " + user);
+                    access = false;
+                    break;
+                default:
+                    Console.WriteLine("Please try aga   in");
+                    break;
+            }
+
+
+
+            //=========================================================================================================
+            // Write testing
+            Console.WriteLine("Testing function Write: please write something");
+            using (StreamWriter writetext = new StreamWriter("test.txt", true))
+            {
+                Console.WriteLine("write");
+                string write = Console.ReadLine();
+                writetext.WriteLine(write);
+            }
+
+            //==========================================================================================================
+            // Read Testing
+            Console.WriteLine("Testing function Read: line will be read");
+            if(permission >= 1)
+            {
+                Console.WriteLine("Read request granted.");
+                if (Fobject == "1")
+                {
+                      using (StreamReader readtext = new StreamReader("test.txt"))
+                      {
+                         string readMeText = readtext.ReadToEnd();
+                         Console.WriteLine(readMeText);
+                      }
+
+                }
+                else if (Fobject == "2")
+                { 
+                    using (StreamReader readtext2 = new StreamReader("test2.txt"))
+                    {
+                        string readMeText2 = readtext2.ReadToEnd();
+                        Console.WriteLine(readMeText2);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Read request not granted.");
+            }
+
+            
+
+            
+            //===========================================================================================================
+            // Testing copying file
+
+            Console.WriteLine("Copying test.txt file to new location");
+
+            string fileName = "test.txt";
+            string sourcePath = @"C:\Users\Christopher\source\repos\opsystemfinal\opsystemfinal\bin\Debug";
+            string targetPath = @"C:\Users\Christopher\source\repos\opsystemfinal\opsystemfinal\bin";
+
+            // Use Path class to manipulate file and directory paths.
+            string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+            string destFile = System.IO.Path.Combine(targetPath, fileName);
+
+            System.IO.File.Copy(sourceFile, destFile, true);
+
+            // Keep console window open in debug mode.
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();  
+        }
